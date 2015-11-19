@@ -12,10 +12,9 @@ import random
 ###############################
 
 # f = open("../data/reuters21578/reut2-002.sgm")
-f = open("../data/tinyshakespeare/input.txt")
+f = open("../data/warpeace_input.txt")
 text = f.read()
 f.close()
-
 
 rnn = CharRNN()
 
