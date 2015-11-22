@@ -5,12 +5,9 @@ import theano
 import theano.tensor as T
 import sys
 import random
-###############################
-#
-#  Prepare the data
-#
-###############################
 
+
+#  Prepare the data
 # f = open("../data/reuters21578/reut2-002.sgm")
 f = open("../data/warpeace_input.txt")
 text = f.read()
@@ -45,3 +42,8 @@ def infer_stochastic(rnn, k, temperature, start_char=" "):
     rnn.reset_state()
 
 
+if __name__=='__main__':
+    print 'Training...'
+    train(0.01, 10)
+    print 'Generate stochastic text:'
+    infer_stochastic(rnn, 10, 1.0, start_char='h')
