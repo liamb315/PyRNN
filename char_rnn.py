@@ -12,9 +12,9 @@ class CharRNN:
         eta = T.scalar()
         temperature=T.scalar()
 
-        num_input = 10
+        num_input = 256
         num_hidden = 500
-        num_output = 10
+        num_output = 256
 
         inputs = InputLayer(X, name="inputs")
         lstm1 = LSTMLayer(num_input, num_hidden, input_layer=inputs, name="lstm1")
