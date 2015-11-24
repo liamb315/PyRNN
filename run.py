@@ -24,7 +24,7 @@ def train(eta, iters):
         j = i * seq_len
         X = text[j:(j+seq_len)]
         Y = text[(j+1):(j+1+seq_len)]
-        print "iteration: %s, cost: %s" % (str(it), str(rnn.train(one_hot(X), one_hot(Y), eta, 1.0)))
+        print "iteration: %s, cost: %s" % (str(it), str(rnn.train(one_hot(X, rnn.num_input), one_hot(Y, rnn.num_output), eta, 1.0)))
 
 
 def infer_stochastic(rnn, k, temperature, start_char=" "):
@@ -42,6 +42,6 @@ def infer_stochastic(rnn, k, temperature, start_char=" "):
 
 if __name__=='__main__':
     print 'Training...'
-    train(0.01, 10)
+    train(10, 25)
     print 'Generate stochastic text:'
     infer_stochastic(rnn, 10, 0.3, start_char='')

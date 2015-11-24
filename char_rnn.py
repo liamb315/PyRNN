@@ -12,14 +12,14 @@ class CharRNN:
         eta = T.scalar()
         temperature=T.scalar()
 
-        num_input = 256
-        num_hidden = 500
-        num_output = 256
+        self.num_input = 256
+        self.num_hidden = 500
+        self.num_output = 256
 
         inputs = InputLayer(X, name="inputs")
-        lstm1 = LSTMLayer(num_input, num_hidden, input_layer=inputs, name="lstm1")
-        lstm2 = LSTMLayer(num_hidden, num_hidden, input_layer=lstm1, name="lstm2")
-        softmax = SoftmaxLayer(num_hidden, num_output, input_layer=lstm2, name="yhat", temperature=temperature)
+        lstm1 = LSTMLayer(self.num_input, self.num_hidden, input_layer=inputs, name="lstm1")
+        lstm2 = LSTMLayer(self.num_hidden, self.num_hidden, input_layer=lstm1, name="lstm2")
+        softmax = SoftmaxLayer(self.num_hidden, self.num_output, input_layer=lstm2, name="yhat", temperature=temperature)
 
         Y_hat = softmax.output()
 

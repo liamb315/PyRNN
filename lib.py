@@ -2,11 +2,11 @@ import numpy as np
 import theano
 import theano.tensor as T
 
-def one_hot(string):
+def one_hot(string, dim=256):
     """
     Take a string and return a one-hot encoding with ASCII
     """
-    res = np.zeros((len(string), 256))
+    res = np.zeros((len(string), dim))
     for i in xrange(len(string)):
         res[i,ord(string[i])] = 1.
     return res
