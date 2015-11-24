@@ -20,7 +20,7 @@ seq_len = 150
 
 def train(eta, iters):
     for it in xrange(iters):
-        i = random.randint(0, len(text)/seq_len)
+        i = random.randint(0, (len(text)/seq_len -1)) # Ensure we don't exceed training corpus
         j = i * seq_len
         X = text[j:(j+seq_len)]
         Y = text[(j+1):(j+1+seq_len)]
