@@ -5,8 +5,8 @@ from lstm import InputLayer, SoftmaxLayer, LSTMLayer
 from lib import make_caches, get_params, SGD, momentum, one_step_updates
 
 class Discrimator:
-	def __init__(self):
-		X   = T.matrix()
+    def __init__(self):
+		X   = T.matrix()	
 		Y   = T.scalar()
 		eta = T.scalar()
 
@@ -27,4 +27,12 @@ class Discrimator:
         caches      = make_caches(params)
 
         # Target replication across the entire sequence to begin
-        cost = T.mean
+        cost = T.mean #TODO
+
+        updates = momentum(cost, params, caches, eta)
+
+        self.train = theano.function([X, Y, eta] cost, updates=updates, allow_input_downcast=True)
+
+    def reset_state(self):
+        for layer in self.layers:
+            layer.reset_state()
