@@ -1,13 +1,13 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from lstm import InputLayer, SigmoidLayer, LSTMLayer
+from lstm import InputLayer, SoftmaxLayer, LSTMLayer
 from lib import make_caches, get_params, SGD, momentum, one_step_updates
 
 class Discriminator:
     def __init__(self):
         X   = T.matrix()	
-        Y   = T.matrix() #Begin with Target replication
+        Y   = T.vector() #Begin with Target replication
         eta = T.scalar()
 
         self.num_input  = 256
@@ -17,10 +17,10 @@ class Discriminator:
         inputs  = InputLayer(X, name="inputs")
         lstm1   = LSTMLayer(self.num_input, self.num_hidden, input_layer=inputs, name="lstm1")
         lstm2   = LSTMLayer(self.num_hidden, self.num_hidden, input_layer=lstm1, name="lstm2")
-        sigmoid = SigmoidLayer(input_layer=lstm2, name="yhat")
+        sigmoid = SoftmaxLayer(self.num_hidden, 2, input_layer=lstm2, name="yhat")
 
-        Y_hat   = sigmoid.output()
-
+        Y_hat   = sigmoid.output()[:, 1]
+        #self.yhat = theano.function([X], Y_hat, allow_input_downcast=True)
         self.layers = inputs, lstm1, lstm2, sigmoid
 
         params      = get_params(self.layers)
