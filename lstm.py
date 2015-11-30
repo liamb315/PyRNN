@@ -1,7 +1,7 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from lib import softmax, dropout, floatX, random_weights, zeros
+from lib import softmax, dropout, floatX, random_weights, zeros, sigmoid
 
 
 class NNLayer:

@@ -11,6 +11,9 @@ def one_hot(string, dim=256):
         res[i,ord(string[i])] = 1.
     return res
 
+def convert_numpy(string):
+    return np.array(list(string), dtype=int)
+
 def floatX(X):
     return np.asarray(X, dtype=theano.config.floatX)
 
